@@ -17,3 +17,27 @@ See Documentation/00-INDEX for a list of what is contained in each file.
 Please read the Documentation/process/changes.rst file, as it contains the
 requirements for building and running the kernel, and information about
 the problems which may result by upgrading your kernel.
+
+
+MID1020L source audit
+=====================
+
+This repository is currently a MediaTek Android kernel 4.19.191 source tree;
+it is not the tablet's confirmed 4.9.190 stock source. The working branch
+``porting/mid1020l-audit-scaffold`` contains the source-research report and
+reproducible, pinned source-fetch script. No stock configuration or device
+partitions have been modified.
+
+See ``SOURCE_AUDIT.md`` for candidate-by-candidate findings and known gaps.
+Run ``bash tools/mid1020l-fetch-sources.sh`` to fetch the pinned, relevant
+external reference trees under ``sources/``. The fetch script refuses to
+overwrite existing destination directories. Its output is for offline
+inspection only; it is not a validated kernel port or flashable image.
+
+Current assessment: Flitsmeister's public 4.19.191 tree provides exact
+``tb8768p1_64_bsp`` platform/DTS and the exact US105 GSLX68X touchscreen
+profile. It is the strongest public hardware reference found, but it does
+not establish 4.9.190 API/BSP compatibility. Its HX8279 panel files are
+for other named panel variants; the exact ``us105_fx_hx8279_boe_wuxga_ips_101``
+initialization source has not been located. Do not reuse a related panel's
+sequence or wiring as a substitute.
